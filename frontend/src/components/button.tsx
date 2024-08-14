@@ -1,4 +1,3 @@
-import { MouseEventHandler } from "react"
 
 interface button{
     buttonText:string,
