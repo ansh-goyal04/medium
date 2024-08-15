@@ -24,7 +24,7 @@ export default function ({
         <div className="text-slate-700 mx-2 text-balance w-1/2"> {`${content.slice(0, content.length/2)}`} </div>
         <div className="flex flex-row mt-4">
           <div className="mx-3 ">{shortTitle}</div>
-          <div className="">{`${Math.ceil(content.length / 100)} min read`}</div>
+          <div className="text-slate-500">{`${Math.ceil(content.length / 100)} min read`}</div>
         </div>
       </div>
     </div>
