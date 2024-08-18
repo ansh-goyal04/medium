@@ -17,8 +17,8 @@ export default function SignIn() {
   const navigate = useNavigate();
   const handleclick=async()=>{
     try{
-      const response=await axios.post(`${BACKEND_URL}/api/v1/user/signup`,input);
-      const token=response.data;
+      const response=await axios.post(`${BACKEND_URL}/api/v1/user/signin`,input);
+      const token=response.data.token;
       localStorage.setItem("token",token);
       navigate("/blogs");
     }

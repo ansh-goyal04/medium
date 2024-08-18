@@ -14,7 +14,7 @@ export default function ({
   shortTitle,
 }: BlogInp) {
   return (
-    <div className=" border-b-2 w-2/3 justify-around m-auto border-slate-100">
+    <div className=" border-b-2 w-2/3 justify-around m-auto border-slate-100 z-0 ">
       <div className="p-4">
         <div className="flex mx-2 my-2">
           <div className="border rounded-full ring-1 h-6 w-6 flex justify-center bg-slate-100  ring-offset-slate-100">
@@ -23,7 +23,7 @@ export default function ({
           <div className="mx-2 text-sm font-medium"> {authorname}</div>
           <div className="mr-2 text-slate-600 text-sm">{publishedAt}</div>
         </div>
-        <div className="font-extrabold text-xl mx-2 cursor-pointer hover:underline w-2/3 text-pretty break-all mb-2">
+        <div className="font-extrabold text-xl mx-2 cursor-pointer hover:underline w-2/3 text-wrap break-all mb-2">
           {title}
         </div>
         <div className="text-slate-700 mx-2 text-pretty w-2/3 break-all font-serif text-sm">

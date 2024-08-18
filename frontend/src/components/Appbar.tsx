@@ -1,7 +1,14 @@
+import { useNavigate } from "react-router-dom";
 
 export default function Appbar(){
+    const navigate=useNavigate();
+    function handleClick(){
+        localStorage.removeItem("token");
+        navigate('/signin');
+
+    }
     return(
-        <div className="flex justify-between bg-gray-300 fixed w-full">
+        <div className="flex justify-between bg-gray-300 fixed w-full z-10">
             <div className="flex">
                 <div className="p-2 mx-2 mt-2 font-serif text-3xl font-bold lg:mr-20">Medium</div>
                 <div className="flex rounded-full bg-slate-100 m-3 p-1 h-10 w-25">
@@ -18,7 +25,7 @@ export default function Appbar(){
 </svg>Write
 </button>
                 </div>
-                <div className="mr-2 p-2"><button>Logout</button></div>
+                <div className="mr-2 p-2"><button onClick={handleClick}>Logout</button></div>
                 <div>
 <div className="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
     <svg className="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>

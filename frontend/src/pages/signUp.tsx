@@ -19,8 +19,7 @@ export default function SignUp() {
     const handleclick=async()=>{
       try{
         const response=await axios.post(`${BACKEND_URL}/api/v1/user/signup`,inputs);
-        const token=response.data.token;
-        
+        const token=response.data.token;       
         localStorage.setItem("token",token);
         navigate("/blogs");
       }
