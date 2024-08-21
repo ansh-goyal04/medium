@@ -16,7 +16,8 @@ exports.signinInp = zod_1.default.object({
 });
 exports.createblogInp = zod_1.default.object({
     title: zod_1.default.string(),
-    content: zod_1.default.string()
+    content: zod_1.default.string(),
+    topic: zod_1.default.string()
 });
 exports.updateblogInp = zod_1.default.object({
     title: zod_1.default.string().optional(),

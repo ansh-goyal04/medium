@@ -1,14 +1,34 @@
+import axios from "axios";
 import { useState } from "react";
+import { BACKEND_URL } from "../config";
+import { useNavigate } from "react-router-dom";
+import { CreateblogInp } from "@ansh_goyal/medium";
 
 export default function CreateBlog() {
-  const [blog, setBlog] = useState({
+  const navigate=useNavigate();
+  const [blog, setBlog] = useState<CreateblogInp>({
     title: "",
     content: "",
+    topic:""
   });
 
+  const handleclick=async()=>{
+    try{
+      const response=await axios.post(`${BACKEND_URL}/api/v1/blog`,blog,{
+        headers:{
+          Authorization:"Bearer"+localStorage.getItem("token")
+        }
+      })
+      navigate('/blogs');
+    }
+    catch(err){
+      console.log(err);
+      
+    }
+  }
   return (
     <div>
-      <div className="bg-slate-100 fixed w-full flex justify-between">
+      <div className="bg-slate-100 fixed top-0 w-full flex justify-between shadow-md">
         <div className="flex my-2">
           <div className="mt-2 px-2 font-serif text-3xl font-bold lg:ml-28">
             Medium
@@ -16,7 +36,7 @@ export default function CreateBlog() {
           <div className="mt-5 text-sm font-normal">Draft in Anshmailbox</div>
         </div>
         <div className="flex my-2 px-2 lg:mr-28">
-          <button className="rounded-full bg-green-600 h-6 w-16 text-sm text-white mt-3 mx-5 font-medium">
+          <button className="rounded-full bg-green-600 h-6 w-16 text-sm text-white mt-3 mx-5 font-medium" onClick={handleclick}>
             Publish
           </button>
           <div className="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
@@ -35,13 +55,31 @@ export default function CreateBlog() {
           </div>
         </div>
       </div>
-      <div className="w-3/4 justify-around border bg-slate-800">
-        <div className="border">
-            <input type="text" placeholder="Title" className="text-2xl border"/>
-        </div>
-        <div>
-            <input type="text" />
-        </div>
+      <div className="flex-col mx-44 w-2/3 mt-24">
+      <div className="mt-4">
+        <textarea  placeholder="Title" rows={2} className="text-5xl w-full text-wrap font-medium outline-none font-serif" onChange={(e)=>{
+          setBlog({
+            ...blog,
+            title:e.target.value
+          })
+        }}/>
+      </div>
+      <div className="">
+        <textarea  placeholder="Tell your story ..." rows={10}  className="font-serif text-3xl font-normal w-full outline-none text-wrap"onChange={(e)=>{
+          setBlog({
+            ...blog,
+            content:e.target.value
+          })
+        }}/>
+      </div>
+      <div className="">
+        <input type="text"  placeholder="Topic" className="font-serif text-4xl font-normal w-full outline-none text-wrap"onChange={(e)=>{
+          setBlog({
+            ...blog,
+            topic:e.target.value
+          })
+        }}/>
+      </div>
       </div>
     </div>
   )

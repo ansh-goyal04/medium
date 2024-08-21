@@ -15,7 +15,8 @@ export type SigninInp=z.infer<typeof signinInp>
 
 export const createblogInp=z.object({
     title:z.string(),
-    content:z.string()
+    content:z.string(),
+    topic:z.string()
 })
 export type CreateblogInp=z.infer<typeof createblogInp>
 

@@ -45,17 +45,20 @@ blogRouter.post("/", async (c) => {
       message:"invalid inputs"
     })
   }
-  const authorId=c.get("jwtPayload");
+  const authorId:string=c.get("jwtPayload")||"";
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
 try{
+  const date:string=new Date().toDateString() ||"";
     const blog = await prisma.blog.create({
-        data: {
-          title: body.title,
+        data:{
+          title:body.title,
           content: body.content,
           authorId: authorId,
-        },
+          publishedAt:date,
+          topic:body.topic
+        }
       });
     
       return c.json({ id: blog.id });

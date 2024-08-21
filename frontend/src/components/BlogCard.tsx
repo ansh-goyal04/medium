@@ -3,7 +3,7 @@ interface BlogInp {
   publishedAt: string;
   title: string;
   content: string;
-  shortTitle?: string;
+  topic?: string;
 }
 
 export default function ({
@@ -11,7 +11,7 @@ export default function ({
   publishedAt,
   title,
   content,
-  shortTitle,
+  topic,
 }: BlogInp) {
   return (
     <div className=" border-b-2 w-2/3 justify-around m-auto border-slate-100 z-0 ">
@@ -33,7 +33,7 @@ export default function ({
         <div className="flex mt-4 justify-between w-2/3">
           <div className="flex flex-row">
           <div className="mx-3 rounded-full py-1 px-3 bg-slate-100 text-sm">
-            {shortTitle}
+            {topic}
           </div>
           <div className="text-slate-500 text-sm py-1">{`${Math.ceil(
             content.length / 100
