@@ -16,10 +16,10 @@ export default function CreateBlog() {
     try{
       const response=await axios.post(`${BACKEND_URL}/api/v1/blog`,blog,{
         headers:{
-          Authorization:"Bearer"+localStorage.getItem("token")
+          Authorization:"Bearer "+localStorage.getItem("token")
         }
       })
-      console.log(response);
+      // console.log(response);
       
       navigate('/blogs');
     }

@@ -30,5 +30,5 @@ model Blog{
   authorId String
   topic String
   publishedAt String
-
+  authorName String @default("Anonymous")
 }

@@ -7,20 +7,25 @@ import { BACKEND_URL } from "../config";
 export default function Blogs() {
   interface Blog{
     title:string,
-    authorname:string,
+    authorName:string,
     publishedAt:string,
     topic:string,
-    content:string
+    content:string,
+    id:string,
 
   }
   const [blogs, setBlogs] = useState<Blog[]>([]);
   useEffect(()=>{
     async function func(){
-      const response=axios.get(`${BACKEND_URL}/api/v1/blog/bulk`);
-      setBlogs((await response).data.blogs);
+      const response=await axios.get(`${BACKEND_URL}/api/v1/blog/bulk`,{
+        headers:{
+          Authorization:"Bearer "+localStorage.getItem("token")
+        }
+      });     
+      setBlogs(response.data.blogs);
     }
     func()
-  },[blogs])
+  },[])
 
   return (
     <div className="flex flex-col">
@@ -28,7 +33,7 @@ export default function Blogs() {
       
       {/* Navbar */}
       <div className="flex justify-around z-10 mt-4">
-        <div className="w-2/3 border-b-2 flex pb-4 mb-6 fixed top-16 z-20">
+        <div className="w-2/3 border-b-2 flex pb-4 mb-6 fixed top-24 z-20">
           <button className="mx-4 text-zinc-900 text-sm hover:text-slate-900 hover:font-semibold">
             For you
           </button>
@@ -55,11 +60,11 @@ export default function Blogs() {
       
       {/* Blog Content */}
       <div className="relative top-32 z-0 overflow-hidden">
-        {blogs.map((blog, index) => (
+        {blogs.map((blog) => (
           <BlogCard
-            key={index}
+            key={blog.id}
             title={blog.title}
-            authorname={blog.authorname}
+            authorName={blog.authorName}
             publishedAt={blog.publishedAt}
             topic={blog.topic}
             content={blog.content}

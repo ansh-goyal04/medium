@@ -46,10 +46,20 @@ blogRouter.post("/", async (c) => {
     })
   }
   const authorId:string=c.get("jwtPayload")||"";
+  
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
 try{
+  const authorName=await prisma.user.findUnique({
+    where:{
+      id:authorId
+    },
+    select:{
+      name:true
+    }
+  }
+  )
   const date:string=new Date().toDateString() ||"";
     const blog = await prisma.blog.create({
         data:{
@@ -57,7 +67,9 @@ try{
           content: body.content,
           authorId: authorId,
           publishedAt:date,
-          topic:body.topic
+          topic:body.topic,
+          // @ts-ignore
+          authorName:authorName.name
         }
       });
     

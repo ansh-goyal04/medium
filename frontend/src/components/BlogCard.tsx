@@ -1,5 +1,5 @@
 interface BlogInp {
-  authorname: string;
+  authorName: string;
   publishedAt: string;
   title: string;
   content: string;
@@ -7,7 +7,7 @@ interface BlogInp {
 }
 
 export default function ({
-  authorname,
+  authorName,
   publishedAt,
   title,
   content,
@@ -18,9 +18,9 @@ export default function ({
       <div className="p-4">
         <div className="flex mx-2 my-2">
           <div className="border rounded-full ring-1 h-6 w-6 flex justify-center bg-slate-100  ring-offset-slate-100">
-            <div>{authorname.charAt(0).toUpperCase()}</div>
+            <div>{authorName.toUpperCase().charAt(0)}</div>
           </div>
-          <div className="mx-2 text-sm font-medium"> {authorname}</div>
+          <div className="mx-2 text-sm font-medium"> {authorName}</div>
           <div className="mr-2 text-slate-600 text-sm">{publishedAt}</div>
         </div>
         <div className="font-extrabold text-xl mx-2 cursor-pointer hover:underline w-2/3 text-wrap break-all mb-2">
