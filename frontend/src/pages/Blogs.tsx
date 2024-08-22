@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import BlogCard from "../components/BlogCard";
 import Appbar from "../components/Appbar";
+import axios from "axios";
+import { BACKEND_URL } from "../config";
 
 export default function Blogs() {
   interface Blog{
@@ -12,7 +14,13 @@ export default function Blogs() {
 
   }
   const [blogs, setBlogs] = useState<Blog[]>([]);
-  useEffect()
+  useEffect(()=>{
+    async function func(){
+      const response=axios.get(`${BACKEND_URL}/api/v1/blog/bulk`);
+      setBlogs((await response).data.blogs);
+    }
+    func()
+  },[blogs])
 
   return (
     <div className="flex flex-col">

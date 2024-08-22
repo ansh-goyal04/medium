@@ -19,6 +19,8 @@ export default function CreateBlog() {
           Authorization:"Bearer"+localStorage.getItem("token")
         }
       })
+      console.log(response);
+      
       navigate('/blogs');
     }
     catch(err){
@@ -65,7 +67,7 @@ export default function CreateBlog() {
         }}/>
       </div>
       <div className="">
-        <textarea  placeholder="Tell your story ..." rows={10}  className="font-serif text-3xl font-normal w-full outline-none text-wrap"onChange={(e)=>{
+        <textarea  placeholder="Tell your story ..." rows={9} className="font-serif text-3xl font-normal w-full outline-none text-wrap"onChange={(e)=>{
           setBlog({
             ...blog,
             content:e.target.value
