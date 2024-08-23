@@ -10,7 +10,7 @@ export default function Appbar(){
     return(
         <div className="flex justify-between bg-gray-300 fixed w-full z-10">
             <div className="flex">
-                <div className="p-2 mx-2 mt-2 font-serif text-3xl font-bold lg:mr-20">Medium</div>
+                <div className="p-2 mx-2 mt-2 font-serif text-3xl font-bold lg:mr-20 cursor-pointer" onClick={()=>{navigate('/blogs')}}>Medium</div>
                 <div className="flex rounded-full bg-slate-100 m-3 p-1 h-10 w-25">
                  <input type="text" placeholder="Search" className="px-2 py-0 rounded-full bg-slate-100 border-none text-sm text-slate-900 outline-none"/>
                  <button className=""><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-5">
