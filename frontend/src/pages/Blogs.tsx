@@ -68,6 +68,7 @@ export default function Blogs() {
             publishedAt={blog.publishedAt}
             topic={blog.topic}
             content={blog.content}
+            id={blog.id}
           />
         ))}
       </div>
