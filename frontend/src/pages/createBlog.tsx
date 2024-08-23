@@ -1,3 +1,57 @@
+import React, { useEffect } from 'react';
+import DragAndDrop from '../components/DragAndDrop';
+
+interface ImageFile extends File {
+  preview: string;
+}
+
+export const ImageUploader: React.FC = () => {
+  const [images, setImages] = useState<ImageFile[]>([]);
+
+  const handleDrop = (acceptedFiles: File[]) => {
+    const imageFiles = acceptedFiles.map((file) =>
+      Object.assign(file, {
+        preview: URL.createObjectURL(file),
+      })
+    );
+    setImages((prevImages) => [...prevImages, ...imageFiles]);
+  };
+
+  const handleRemoveImage = (indexToRemove: number) => {
+    const updatedImages = images.filter((_, index) => index !== indexToRemove);
+    setImages(updatedImages);
+  };
+
+  useEffect(() => {
+    // Revoke data URIs to avoid memory leaks
+    return () => images.forEach((file) => URL.revokeObjectURL(file.preview));
+  }, [images]);
+
+  return (
+    <div>
+      <DragAndDrop onDrop={handleDrop} />
+      <div className="mt-4">
+        {images.map((file, index) => (
+          <div key={index} className="mb-4 flex flex-col items-center">
+            <img src={file.preview} alt="preview" className="w-3/4 h-auto mr-4 p-3" />
+            <button
+              onClick={() => handleRemoveImage(index)}
+              className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-700"
+            >
+              Remove
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+
+
+
+
+// .........
 import axios from "axios";
 import { useState } from "react";
 import { BACKEND_URL } from "../config";
@@ -57,7 +111,8 @@ export default function CreateBlog() {
           </div>
         </div>
       </div>
-      <div className="flex-col mx-44 w-2/3 mt-24">
+      <div className='flex  mt-24'>
+      <div className="flex-col mx-44 w-2/3">
       <div className="mt-4">
         <textarea  placeholder="Title" rows={2} className="text-5xl w-full text-wrap font-medium outline-none font-serif" onChange={(e)=>{
           setBlog({
@@ -75,14 +130,20 @@ export default function CreateBlog() {
         }}/>
       </div>
       <div className="">
-        <input type="text"  placeholder="Topic" className="font-serif text-4xl font-normal w-full outline-none text-wrap"onChange={(e)=>{
+        <input type="text"  placeholder="Topic" className="font-serif text-4xl font-norma mt-4l w-full outline-none text-wrap"onChange={(e)=>{
           setBlog({
             ...blog,
             topic:e.target.value
           })
         }}/>
       </div>
+      
       </div>
+      <div className='mx-4'>
+        <ImageUploader/>
+      </div>
+      </div>
+      
     </div>
   )
 }

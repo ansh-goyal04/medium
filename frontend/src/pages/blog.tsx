@@ -18,14 +18,14 @@ console.log(id);
 
     useEffect(()=>{
         async function func(){
-            const response=await axios.get(`${BACKEND_URL}/api/v1/blog?id:${id}`,{
+            const response=await axios.get(`${BACKEND_URL}/api/v1/blog/${id}`,{
                 headers:{
                     Authorization:"Bearer "+localStorage.getItem("token")
                 }
             })
             console.log(response);
             
-            setBlog(response.data.blog)
+            setBlog(response.data.getblog)
         }
         func();
     },[])

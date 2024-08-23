@@ -31,6 +31,7 @@ export default function ({
         <div
           className="font-extrabold text-xl mx-2 cursor-pointer hover:underline w-2/3 text-wrap break-all mb-2"
           onClick={()=>{
+            console.log(id);           
             navigate('/blog?id='+id)
           }}
         >
@@ -38,7 +39,7 @@ export default function ({
         </div>
         <div className="text-slate-700 mx-2 text-pretty w-2/3 break-all font-serif text-sm">
           {" "}
-          {`${content.slice(0, 900)} ...`}{" "}
+          {`${content.slice(0, 300)} ...`}{" "}
         </div>
         <div className="flex mt-4 justify-between w-2/3">
           <div className="flex flex-row">
@@ -46,7 +47,7 @@ export default function ({
               {topic}
             </div>
             <div className="text-slate-500 text-sm py-1">{`${Math.ceil(
-              content.length / 100
+              content.length / 800
             )} min read`}</div>
           </div>
           <div className="cursor-pointer pointer-events-auto">
