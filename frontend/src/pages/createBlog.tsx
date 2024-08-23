@@ -68,7 +68,7 @@ export default function CreateBlog() {
 
   const handleclick=async()=>{
     try{
-      const response=await axios.post(`${BACKEND_URL}/api/v1/blog`,blog,{
+      await axios.post(`${BACKEND_URL}/api/v1/blog`,blog,{
         headers:{
           Authorization:"Bearer "+localStorage.getItem("token")
         }
