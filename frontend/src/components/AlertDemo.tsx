@@ -1,14 +1,33 @@
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert"
-import { Terminal } from "lucide-react"
+import {  useState,useEffect } from "react";
 
-export default function AlertDemo() {
-    return (
-      <Alert>
-        <Terminal className="h-4 w-4" />
-        <AlertTitle>Heads up!</AlertTitle>
-        <AlertDescription>
-          You can add components to your app using the cli.
-        </AlertDescription>
+import { X } from "lucide-react";
+interface alertType{
+  title:string;
+  message:string
+}
+export default function AutoDismissAlert({ title, message }:alertType) {
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setVisible(false), 5000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!visible) return null;
+
+  return (
+    <div className="fixed top-4 right-4 w-80 z-50">
+      <Alert className="relative p-4 border-l-4 border-blue-500 bg-blue-100">
+        <button
+          className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
+          onClick={() => setVisible(false)}
+        >
+          <X size={18} />
+        </button>
+        <AlertTitle className="font-semibold text-blue-700">{title}</AlertTitle>
+        <AlertDescription className="text-sm text-blue-600">{message}</AlertDescription>
       </Alert>
-    )
-  }
+    </div>
+  );
+}
