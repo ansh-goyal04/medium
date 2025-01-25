@@ -7,7 +7,7 @@ import SubHeading from "../components/subHeading";
 import { SignupInp } from "@ansh_goyal/medium";
 import axios from 'axios';
 import { BACKEND_URL } from "../config";
-
+import AlertDemo from "../components/AlertDemo";
 
 export default function SignUp() {
     const [inputs,setInputs]=useState<SignupInp>({
@@ -17,6 +17,11 @@ export default function SignUp() {
     });
     const navigate = useNavigate();
     const handleclick=async()=>{
+      if(inputs.email.length==0 || inputs.password.length==0){
+        // alert("jd")
+        return <div> <AlertDemo></AlertDemo></div>
+      }
+      else 
       try{
         const response=await axios.post(`${BACKEND_URL}/api/v1/user/signup`,inputs);
         const token=response.data.token;       
@@ -44,7 +49,7 @@ export default function SignUp() {
             onChange={(e:any)=>{
                 setInputs({
                     ...inputs,
-                    name:e.target.value
+                    name:e.target.value.trim()
                 })
             }}
           ></InputBox>
@@ -55,7 +60,7 @@ export default function SignUp() {
             onChange={(e:any)=>{
                 setInputs({
                     ...inputs,
-                    email:e.target.value
+                    email:e.target.value.trim()
                 })
             }}
           ></InputBox>
@@ -66,7 +71,7 @@ export default function SignUp() {
             onChange={(e:any)=>{
                 setInputs(inputs=>({
                     ...inputs,
-                    password:e.target.value
+                    password:e.target.value.trim()
                 }))
             }}
           ></InputBox>
