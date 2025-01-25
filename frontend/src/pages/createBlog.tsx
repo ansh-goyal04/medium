@@ -63,7 +63,7 @@ export default function CreateBlog() {
   const [blog, setBlog] = useState<CreateblogInp>({
     title: "",
     content: "",
-    topic:""
+    topic:"",
   });
 
   const handleclick=async()=>{
